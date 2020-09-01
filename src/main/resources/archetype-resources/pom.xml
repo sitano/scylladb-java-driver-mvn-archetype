@@ -18,17 +18,17 @@
     <dependency>
       <groupId>com.scylladb</groupId>
       <artifactId>java-driver-core</artifactId>
-      <version>4.8.0-scylla-0</version>
+      <version>${driver}</version>
     </dependency>
     <dependency>
       <groupId>com.scylladb</groupId>
       <artifactId>java-driver-query-builder</artifactId>
-      <version>4.8.0-scylla-0</version>
+      <version>${driver}</version>
     </dependency>
     <dependency>
       <groupId>com.scylladb</groupId>
       <artifactId>java-driver-mapper-runtime</artifactId>
-      <version>4.8.0-scylla-0</version>
+      <version>${driver}</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
@@ -82,13 +82,44 @@
             <path>
               <groupId>com.scylladb</groupId>
               <artifactId>java-driver-mapper-processor</artifactId>
-              <version>4.8.0-scylla-0</version>
+              <version>${driver}</version>
             </path>
           </annotationProcessorPaths>
           <compilerArgs>
             <arg>-Aproject=${project.groupId}/${project.artifactId}</arg>
           </compilerArgs>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.1.2</version>
+        <executions>
+          <!-- copy dependencies -->
+          <execution>
+            <id>copy-dependencies</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+              <overWriteReleases>false</overWriteReleases>
+              <overWriteSnapshots>false</overWriteSnapshots>
+              <overWriteIfNewer>true</overWriteIfNewer>
+            </configuration>
+          </execution>
+          <!-- build class path, use it with: java -classpath ./target/app-1.0-SNAPSHOT.jar:$(cat ./target/dependencies) ... -->
+          <execution>
+            <id>build-classpath</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>build-classpath</goal>
+            </goals>
+            <configuration>
+              <outputFile>${project.build.directory}/dependencies</outputFile>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
