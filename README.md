@@ -22,6 +22,9 @@ ScyllaDB development:
 
 ```bash
 $ mvn archetype:generate -DarchetypeGroupId=com.scylladb -DarchetypeArtifactId=java-quickstart -DarchetypeVersion=1.0-SNAPSHOT -DgroupId=com.project -DartifactId=sample -Dversion=1.0-SNAPSHOT
+$ cd sample
+$ mvn package
+$ java -classpath ./target/sample-1.0-SNAPSHOT.jar:$(cat ./target/dependencies) com.project.App
 ```
 
 # dependencies
