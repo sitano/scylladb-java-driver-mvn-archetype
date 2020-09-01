@@ -21,7 +21,7 @@ ScyllaDB development:
 # quick start
 
 ```bash
-$ mvn archetype:generate -DarchetypeGroupId=com.scylladb -DarchetypeArtifactId=java-quickstart -DarchetypeVersion=1.0-SNAPSHOT -DgroupId=new.project.id -DartifactId=sample -Dversion=1.0-SNAPSHOT
+$ mvn archetype:generate -DarchetypeGroupId=com.scylladb -DarchetypeArtifactId=java-quickstart -DarchetypeVersion=1.0-SNAPSHOT -DgroupId=com.project -DartifactId=sample -Dversion=1.0-SNAPSHOT
 ```
 
 # dependencies
